@@ -1,0 +1,327 @@
+\documentclass[10pt,a4paper,landscape]{article}
+\usepackage[landscape,top=1.6cm,bottom=1cm,left=1cm,right=1cm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\usepackage{tocloft}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{titlesec}
+\usepackage{minted}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{tasks}
+\usepackage{tikz}
+\usepackage{newunicodechar}
+\newunicodechar{√}{$\sqrt{\phantom{x}}$} 
+\newunicodechar{∑}{$\sum$}
+
+\settasks{label=\arabic*.}
+\settasks{after-item-skip=1pt}
+ 
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{sagorahmedmunna}
+\fancyhead[R]{Page \thepage{} of {\pageref{LastPage}}}
+\setlength{\columnseprule}{0.4pt}
+\setlength{\headsep}{10pt}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\setlength{\cftbeforesecskip}{2pt}
+\hypersetup{pdfborder={0 0 0}}
+
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}[\vspace{0pt}\hrule\vspace{0pt}]
+\titlespacing{\section}{0pt}{5pt}{5pt}
+
+\usemintedstyle{perldoc}
+\setminted{breaklines=true, tabsize=2, fontsize=\small, baselinestretch=0.8}
+
+\begin{document}
+	
+	\begin{center}
+		{\LARGE\textbf{CP Template}}\\[8pt]
+		{\large Prepared By: sagorahmedmunna}\\
+	\end{center}
+
+	\begin{multicols*}{3}
+	
+	\tableofcontents
+	\newpage
+	
+
+		
+		\section{Custom Codes}
+		\inputminted{cpp}{codes/0custom.cpp}
+		
+		\section{Articulation Bridge}
+		\inputminted{cpp}{codes/ARTICULATION_BRIDGE.cpp}
+		
+		\section{Articulation Point}
+		\inputminted{cpp}{codes/ARTICULATION_POINT.cpp}
+		
+		\section{Bellman Ford}
+		\inputminted{cpp}{codes/BELLMAN_FORD.cpp}
+
+		
+		\section{Binary \& Ternary Search}
+		\inputminted{cpp}{codes/BINARY_AND_TERNARY_SEARCH.cpp}
+		
+		\section{2D BIT Range Update \& Range Query}
+		\inputminted{cpp}{codes/BIT_2D_RANGE_UPDATE_RANGE_QUERY.cpp}
+		
+		\section{Centroid Decomposition}
+		\inputminted{cpp}{codes/CENTROID_DECOMPOSITION.cpp}
+		
+		\section{Closest Index Where Each Element in Distinct}
+		\inputminted{cpp}{codes/CLOSEST_INDEX_WHERE_EACH_ELEMENT_IS_DISTINCT.cpp}
+		
+		\section{Closest Min Max}
+		\inputminted{cpp}{codes/CLOSEST_MIN_MAX.cpp}
+		
+		\section{Compress Array}
+		\inputminted{cpp}{codes/COMPRESS_ARRAY.cpp}
+		
+		\section{Convex Hull}
+		\inputminted{cpp}{codes/CONVEX_HULL.cpp}
+		
+		\section{DFS with LCA}
+		\inputminted{cpp}{codes/DFS_with_LCA.cpp}
+		
+		\section{Dijkstra}
+		\inputminted{cpp}{codes/DIJKSTRA.cpp}
+		
+		\section{Digit DP}
+		\inputminted{cpp}{codes/DIGIT_DP.cpp}
+		
+		\section{Distinct Subsequence}
+		\inputminted{cpp}{codes/DISTINCT_SUBSEQUENCE.cpp}
+		
+		\section{DSU Kruskal's Algorithm MST}
+		\inputminted{cpp}{codes/DSU_KRUSKALS_ALGORITHM_MST.cpp}
+		
+		\section{Exclution DP}
+		\inputminted{cpp}{codes/exclutionDP.cpp}
+		
+		\section{Fenwick Tree 2D}
+		\inputminted{cpp}{codes/FENWICK_TREE_2D.cpp}
+		
+		
+		\section{Fenwick Tree BIT}
+		\inputminted{cpp}{codes/FENWICK_TREE_BIT.cpp}
+		
+		\section{FFT}
+		\inputminted{cpp}{codes/FFT.cpp}
+		
+		\section{Floyd Warshall}
+		\inputminted{cpp}{codes/FLOYD_WARSHALL.cpp}
+		
+		\section{Geometry}
+		\inputminted{cpp}{codes/GEOMETRY.cpp}
+		
+		\section{Hash Map}
+		\inputminted{cpp}{codes/HASH_MAP.cpp}
+		
+		\section{Hashing with Update}
+		\inputminted{cpp}{codes/HASHING_WITH_UPDATE.cpp}
+		
+		\section{HLD}
+		\inputminted{cpp}{codes/HLD.cpp}
+		
+		\section{Hopcroft Karp}
+		\inputminted{cpp}{codes/HOPCROFT_KARP.cpp}
+		
+		\section{Hungarian Min Assignment}
+		\inputminted{cpp}{codes/HUNGARIAN_MIN_ASSIGNMENT.cpp}
+		
+		\section{KMP}
+		\inputminted{cpp}{codes/KMP.cpp}
+		
+		\section{Longest Path in DAG}
+		\inputminted{cpp}{codes/LONGEST_PATH_IN_DAG.cpp}
+		
+		\section{Manacher}
+		\inputminted{cpp}{codes/MANACHER.cpp}
+		
+		\section{Merge Sort Tree}
+		\inputminted{cpp}{codes/MERGE_SORT_TREE.cpp}
+		
+		\section{MEX with TRIE}
+		\inputminted{cpp}{codes/MEX_WITH_TRIE.cpp}
+		
+		\section{Minimum Expression}
+		\inputminted{cpp}{codes/MINIMUM_EXPRESSION.cpp}
+		
+		\section{Number Theory}
+		\inputminted{cpp}{codes/NUMBER_THEORY.cpp}
+		
+		\section{Ordered Set}
+		\inputminted{cpp}{codes/ORDERED_SET.cpp}
+		
+		\section{SCC}
+		\inputminted{cpp}{codes/SCC.cpp}
+		
+		\section{Segment Tree Iterative Point Update Range Query}
+		\inputminted{cpp}{codes/SEGMENT_TREE_ITERATIVE_PointUpdate_RangeQuery.cpp}
+		
+		\section{Segment Tree Lazy}
+		\inputminted{cpp}{codes/SEGMENT_TREE_LAZY.cpp}
+		
+		\section{Segment Tree}
+		\inputminted{cpp}{codes/SEGMENT_TREE.cpp}
+		
+		\section{SOS DP}
+		\inputminted{cpp}{codes/SOS_DP.cpp}
+		
+		\section{Sparse Table RMQ}
+		\inputminted{cpp}{codes/SPARSE_TABLE_RMQ.cpp}
+		
+		\section{Stress Testing}
+		\inputminted{cpp}{codes/STRESS_TESTING.cpp}
+		
+		\section{Sublime Build}
+		\inputminted{cpp}{codes/SUBLIME_BUILD.cpp}
+		
+		\section{Suffix Array}
+		\inputminted{cpp}{codes/SUFFIX_ARRAY.cpp}
+		
+		\section{Topological Sort}
+		\inputminted{cpp}{codes/TOPOLOGICAL_SORT.cpp}
+		
+		\section{Trie}
+		\inputminted{cpp}{codes/TRIE.cpp}
+		
+		\section{XOR Basis}
+		\inputminted{cpp}{codes/XOR_BASIS.cpp}
+		
+		\section{Z Function}
+		\inputminted{cpp}{codes/Z_FUNCTION.cpp}
+		
+		\section{Mathematical Formulas \& Notes}
+		\begin{enumerate}
+			\item \textbf{PI up to 31: } 3.1415926535897932384626433832795
+			\item \textbf{PI value in CPP: } $2*acos(0), 2*asin(1), M\_PI$
+			
+			\item\textbf{Formula for angle C using the Law of Cosines} $C = \cos^{-1} \left( \frac{a^2 + b^2 - c^2}{2ab} \right)$ 
+			
+			\item\textbf{Sum remainder: n mod 1+n mod 2+ n mod 3 +......+n mod m :} n*m-sum of divisors form 1 to n
+			
+			\item\textbf{A number is divisible by 60 if and only if it is divisible by 3 and 20}  
+			
+			\item\textbf{All numbers greater than 1099 can be written as a sum of 11 and 111} 
+			
+			\item\textbf{Legendre's formula:} $\nu _{p}(n!)=\sum _{i=1}^{L}\left\lfloor {\frac {n}{p^{i}}}\right\rfloor$
+			,where ${L=\lfloor \log _{p}n\rfloor}$ 
+			
+			
+			\item $^nC_r = \binom{n}{r} = \frac{n!}{r!(n-r)!}$, $^nP_r = \frac{n!}{(n-r)!}$
+			
+			\item $(a-b)\%M = (a\%M - b\%M + M)\%M$
+			
+			\item $(a/b)\%M = (a\%M * b^{-1}\%M)\%M$
+			
+			\item $(a^b)\%M = ((a\%M)^b)\%M$
+			
+			\item \textbf{Euler's Totient Function (ETF):} Count of numbers less than n that are co-prime to n is,\\ $\phi(n) = n * \prod_{p\mid n} (1 - \frac{1}{p})$\\Here, p = distinct prime factors of n
+			
+			\item \textbf{Congruence:} $a \equiv b \pmod{M}$\\ if $a\%M = b\%M$ and $M\mid(a-b)$
+			
+			\item \textbf{Euler's Theorem:} $a^{\phi{(M)}} \equiv 1 \pmod{M}$, \\where $a$ and $M$ are co-prime
+			
+			\item \textbf{Fermat's Little Theorem:} $a^{M-1} \equiv 1 \pmod{M}$, where M is prime
+			
+			\item $a^{b} \equiv a^{b\bmod{\phi(M)}} \pmod{M}$ or it can be written that, $a^{b}\bmod{M} = a^{b\bmod{\phi(M)}}\bmod{M}$ or,\\ $a^{b}\bmod{M} = a^{b\bmod{M-1}}\bmod{M}$
+			
+			\item \textbf{$x$ steps forward or backward in a circular number range:} \\ $newPos = l + ((pos-l+x)\%N)+N)\%N$\\ Where $N = l-r+1$ (total numbers in range)
+			
+			\item \textbf{Stars \& Bars:} $x_1 + x_2 + \dots + x_k = n$ with $x_i \ge 0$ has $\binom{n + k - 1}{n}$ solutions and with $x_i > 0$ has $\binom{n - 1}{k - 1}$ solutions.
+			
+			\item Number of subsequences of length $k$ from an array of size $n$ such that $x$ appears at least once in the subsequence, where that $x$ appears $c$ times in the array: $^nC_k - ^{n-c}C_k$ 
+			
+			\item \textbf{Hockey-stick Identity: } $n > r, \sum \limits_{i=r}^n{i \choose r}={n+1 \choose r+1}$
+			
+			\item $a^k - b^k = (a - b) \cdot (a^{k - 1}b^0 + a^{k - 2}b^1 + … + a^0b^{k - 1})$
+			
+			\item $ab \mod\ ac=a(b \mod\ c)$
+			
+			\item $|a - b| + |b - c| + |c - a| = 2 (\max (a, b, c) - \min (a, b, c))$
+			
+			\item if $a \cdot b \leq c$ then $a \leq \left \lfloor \dfrac{c}{b} \right \rfloor$ Same for $<, \leq, >, \geq$
+			
+			\item For positive integer $n$ \& arbitrary real numbers $m, x,$ \newline $\left \lfloor \dfrac{\left \lfloor x/m \right \rfloor}{n} \right \rfloor = \left \lfloor \dfrac{x}{mn} \right \rfloor$ and $\left \lceil \dfrac{\left \lceil x/m \right \rceil}{n} \right \rceil = \left \lceil \dfrac{x}{mn} \right \rceil$
+			
+		\end{enumerate}
+		
+		% \newpage 
+		
+		% \section{More Formulas}
+		
+		\noindent \textbf{Simple Formulas}
+		\vspace{-.15 cm}
+		\begin{tasks}(1)
+			\task $(a \pm b)^3 = a^3 \pm 3a^2b + 3ab^2 \pm b^3$
+			\task $a^3 \pm b^3 = (a+b)(a^2 \mp ab + b^2)$
+			\task $\sin(A \pm B) = \sin A \cos B \pm \cos A \sin B$
+			\task $\cos(A \pm B) = \cos A \cos B \mp \sin A \sin B$
+			\task $\tan(A \pm B) = \frac{\tan A \pm \tan B}{1 \mp \tan A \tan B}$
+			\task $\sin A \pm \sin B = 2\sin\left(\frac{A \pm B}{2}\right)\cos\left(\frac{A \mp B}{2}\right)$
+			\task $\cos A + \cos B = 2\cos\left(\frac{A+B}{2}\right)\cos\left(\frac{A-B}{2}\right)$
+			\task $\cos A - \cos B = 2\sin\left(\frac{A+B}{2}\right)\sin\left(\frac{B - A}{2}\right)$
+			\task $\sin A \sin B = -\frac{1}{2}[\cos(A+B) - \cos(A-B)]$
+			\task $\cos A \cos B = \frac{1}{2}[\cos(A+B) + \cos(A-B)]$
+			\task $\sin A \cos B = \frac{1}{2}[\sin(A+B) + \sin(A-B)]$
+			\task $\sin 2\theta = 2\sin\theta\cos\theta = \frac{2\tan\theta}{1+\tan^2\theta}$
+			\task $\cos 2\theta = \cos^2\theta - \sin^2\theta = 2\cos^2\theta - 1 $\\$= 1 - 2\sin^2\theta = \frac{1-\tan^2\theta}{1+\tan^2\theta}$
+			\task $\tan 2\theta = \frac{2\tan\theta}{1-\tan^2\theta}$
+			\task $\sin 3\theta = 3\sin\theta - 4\sin^3\theta$
+			\task $\cos 3\theta = 4\cos^3\theta - 3\cos\theta$
+			\task $\tan 3\theta = \frac{3\tan\theta - \tan^3\theta}{1-3\tan^2\theta}$
+			\task $1 + \cos 2\theta = 2\cos^2\theta$
+			\task $1 - \cos 2\theta = 2\sin^2\theta$
+			\task $1 \pm \sin 2\theta = (\cos\theta \pm \sin\theta)^2$
+			\task $\sin^{-1} x = \cos^{-1} \sqrt{1-x^2}$
+			\task $2\sin^{-1} x = \sin^{-1}(2x\sqrt{1-x^2})$
+			\task $2\cos^{-1} x = \cos^{-1}(2x^2 - 1)$
+			\task $2\tan^{-1} x = \tan^{-1}\left(\frac{2x}{1-x^2}\right)$
+			\task $2\tan^{-1} x = \sin^{-1}\left(\frac{2x}{1+x^2}\right)$
+			\task $2\tan^{-1} x = \cos^{-1}\left(\frac{1-x^2}{1+x^2}\right)$
+			\task $3\sin^{-1} x = \sin^{-1}(3x - 4x^3)$
+			\task $3\cos^{-1} x = \cos^{-1}(4x^3 - 3x)$
+			\task $3\tan^{-1} x = \tan^{-1}\left(\frac{3x-x^3}{1-3x^2}\right)$
+			\task $\sin^{-1} x \pm \sin^{-1} y = \sin^{-1}\left[x\sqrt{1-y^2} \pm y\sqrt{1-x^2}\right]$
+			\task $\cos^{-1} x \pm \cos^{-1} y = \cos^{-1}\left[xy \mp \sqrt{1-x^2}\sqrt{1-y^2}\right]$
+			\task $\tan^{-1} x \pm \tan^{-1} y = \tan^{-1}\left(\frac{x \pm y}{1 \mp xy}\right)$
+			\task $\tan^{-1} x + \tan^{-1} y + \tan^{-1} z = \tan^{-1}\left(\frac{x+y+z-xyz}{1-xy-yz-zx}\right)$
+		\end{tasks}
+		
+		\noindent \textbf{Short Formulas}
+		\vspace{-.15 cm}
+		\begin{tasks}(2)
+			\task $\sin(-\theta) = -\sin\theta$
+			\task $\cos(-\theta) = \cos\theta$
+			\task $\tan(-\theta) = -\tan\theta$
+			\task $\sin\left(\frac{\pi}{2} - \theta\right) = \cos\theta$
+			\task $\cos\left(\frac{\pi}{2} - \theta\right) = \sin\theta$
+			\task $\tan\left(\frac{\pi}{2} - \theta\right) = \cot\theta$
+			\task $\cot\left(\frac{\pi}{2} - \theta\right) = \tan\theta$
+			\task $\csc\left(\frac{\pi}{2} - \theta\right) = \sec\theta$
+			\task $\sec\left(\frac{\pi}{2} - \theta\right) = \csc\theta$
+			\task $\sin\left(\frac{\pi}{2} + \theta\right) = \cos\theta$
+			\task $\cos\left(\frac{\pi}{2} + \theta\right) = -\sin\theta$
+			\task $\tan\left(\frac{\pi}{4} + \theta\right) = \frac{1+\tan\theta}{1-\tan\theta}$
+			\task $\tan\left(\frac{\pi}{4} - \theta\right) = \frac{1-\tan\theta}{1+\tan\theta}$
+			\task $\sin(\pi + \theta) = -\sin\theta$
+			\task $\cos(\pi + \theta) = -\cos\theta$
+			\task $\sin(\pi - \theta) = \sin\theta$
+			\task $\cos(\pi - \theta) = -\cos\theta$
+			\task $\log_a a = 1$
+			\task $a^{\log_a b} = b$
+			\task $\log_b a = \frac{\log a}{\log b}$
+			\task $\log a^m = m \log a$
+		\end{tasks}
+		
+		
+	\end{multicols*}
+	
+\end{document}
