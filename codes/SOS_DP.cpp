@@ -50,42 +50,26 @@ void backward2() { // exclude superset sum
 }
 void sosDP(vector<int>& a) {
   Pow2[0] = 1;
-  for (int i = 1; i < N; i++) {
-    Pow2[i] = (Pow2[i - 1] * 2) % mod;
-  }
-  for (auto& ai : a) {
-    f[ai]++;
-    g[ai]++;
-  }
-  forward1();
-  forward2();
+  for (int i = 1; i < N; i++) Pow2[i] = (Pow2[i - 1] * 2) % mod;
+  for (auto& ai : a) f[ai]++, g[ai]++;
+  forward1(); forward2();
   for (int i = 0; i < N; i++) {
     // all pair (i < j)
-    pairF[i] = nC2(f[i]);
-    pairG[i] = nC2(g[i]);
+    pairF[i] = nC2(f[i]), pairG[i] = nC2(g[i]);
     // subsequence
-    subseqF[i] = Pow2[f[i]] - 1;
-    subseqG[i] = Pow2[g[i]] - 1;
+    subseqF[i] = Pow2[f[i]] - 1, subseqG[i] = Pow2[g[i]] - 1;
   }
-  backward1();
-  backward2();
+  backward1(); backward2();
 }
-int subMaskOf(int x) { // x | y = x
-  return f[x];
-}
-int superMaskOf(int x) { // x & y = x
-  return g[x];
-}
-int countPairsWithAnd(int x) { // y & z = x (i < j)
-  return pairG[x];
-}
-int countPairsWithOr(int x) { // y | z = x (i < j)
-  return pairF[x];
-}
-int countSubseqWithAnd(int x) {
-  return subseqG[x];
-}
-int countSubseqWithOr(int x) {
-  return subseqF[x];
-}
-sosDP(a); // clear everything
+// x | y = x
+int subMaskOf(int x) return f[x];
+// x & y = x
+int superMaskOf(int x) return g[x];
+// y & z = x (i < j)
+int countPairsWithAnd(int x) return pairG[x];
+// y | z = x (i < j)
+int countPairsWithOr(int x) return pairF[x];
+int countSubseqWithAnd(int x) return subseqG[x];
+int countSubseqWithOr(int x) return subseqF[x];
+
+sosDP(a); // clear everything before use
