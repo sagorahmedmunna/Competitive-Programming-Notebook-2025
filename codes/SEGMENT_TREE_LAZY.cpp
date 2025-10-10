@@ -1,102 +1,69 @@
-const long long INF = 1.1e17;
-struct node { #change
-  long long sum, lazy_add;
-  node() {
-    sum = 0;
-    lazy_add = INF;
+int64_t sum[4 * N], lz[4 * N];
+void Apply(int u, int v) {
+  if (lz[v] != INF) lz[v] = (lz[v] * lz[u]) % mod;
+  else lz[v] = lz[u];
+}
+void Push(int u, int l, int r) {
+  if (lz[u] == INF) return;
+  if (l != r) {
+    Apply(u, 2 * u);
+    Apply(u, 2 * u + 1);
   }
-};
-struct SegmentTreeLazy {
-  int size = 1;
-  vector<node> st;
-  SegmentTreeLazy() {}
-  SegmentTreeLazy(int n) { Initial(n); }
-  SegmentTreeLazy(vector<int>& a) {
-    Initial((int)a.size() - 1);
-    Build(1, 0, size, a);
+  sum[u] = (sum[u] * lz[u]) % mod;
+  lz[u] = INF;
+}
+void Merge(int u, int v, int w) {
+  sum[u] = (sum[v] + sum[w]) % mod;
+}
+void Build(int u = 1, int s = 0, int e = n) {
+  if (s == e) {
+    sum[u] = a[s]; // change
+    lz[u] = INF;
+    return;
   }
-  void Initial(int _n) {
-    size = _n;
-    int tree_size = 1;
-    while (tree_size <= size) tree_size *= 2;
-    st.resize(tree_size * 2);
-  }
-  node Make_node(long long val) { #change
-    node res;
-    res.sum = val;
-    res.lazy_add = INF;
-    return res;
-  }
-  node Merge(node& l, node& r) { #change
-    node res;
-    res.sum = l.sum + r.sum;
-    return res;
-  }
-  void Push(int u, int l, int r) { #change
-    if (st[u].lazy_add == INF) return;
-    if (l != r) {
-      int v = 2 * u, w = 2 * u + 1;
-      if (st[v].lazy_add != INF) st[v].lazy_add += st[u].lazy_add;
-      else st[v].lazy_add = st[u].lazy_add;
-      if (st[w].lazy_add != INF) st[w].lazy_add += st[u].lazy_add;
-      else st[w].lazy_add = st[u].lazy_add;
-    }
-    st[u].sum += (r - l + 1) * st[u].lazy_add;
-    st[u].lazy_add = INF;
-  }
-  void Build(int u, int s, int e, vector<int>& a) {
-    if (s == e) {
-      st[u] = Make_node(a[s]);
-      return;
-    }
-    int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-    Build(v, s, m, a);
-    Build(w, m + 1, e, a);
-    st[u] = Merge(st[v], st[w]);
-  }
-  void Update(int u, int s, int e, int l, int r, long long val) {
+  int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
+  Build(v, s, m);
+  Build(w, m + 1, e);
+  Merge(u, v, w);
+}
+void Update(int l, int r, int64_t val, int u = 1, int s = 0, int e = n) {
+  Push(u, s, e);
+  if (e < l || r < s) return;
+  if (l <= s && e <= r) { // change
+    if (lz[u] != INF) lz[u] = (lz[u] * val) % mod;
+    else lz[u] = val;
     Push(u, s, e);
-    if (e < l || r < s) return;
-    if (l <= s && e <= r) { #change
-      if (st[u].lazy_add != INF) st[u].lazy_add += val;
-      else st[u].lazy_add = val;
-      Push(u, s, e);
-      return;
-    }
-    int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-    Update(v, s, m, l, r, val);
-    Update(w, m + 1, e, l, r, val);
-    st[u] = Merge(st[v], st[w]);
+    return;
   }
-  void Update(int l, int r, long long val) {
-    Update(1, 0, size, l, r, val);
+  int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
+  Update(l, r, val, v, s, m);
+  Update(l, r, val, w, m + 1, e);
+  Merge(u, v, w);
+}
+int64_t Query(int l, int r, int u = 1, int s = 0, int e = n) {
+  Push(u, s, e);
+  if (e < l || r < s) return 0;
+  if (l <= s && e <= r) return sum[u]; // change
+  int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
+  int64_t lSum = Query(l, r, v, s, m);
+  int64_t rSum = Query(l, r, w, m + 1, e);
+  return (lSum + rSum) % mod; // change
+}
+void BuildSeg() {
+  for (int i = 0; i <= 4 * n; i++) {
+    sum[i] = 0;
+    lz[i] = INF;
   }
-  node Query(int u, int s, int e, int l, int r) {
-    Push(u, s, e);
-    if (e < l || r < s) { #change
-      return node();
-    }
-    if (l <= s && e <= r) return st[u];
-    int v = 2 * u, w = 2 * u + 1, m = (s + e) / 2;
-    node lsum = Query(v, s, m, l, r);
-    node rsum = Query(w, m + 1, e, l, r);
-    return Merge(lsum, rsum);
+  Build();
+}
+int Idx_query(int l, int r, int u, int s, int e) {
+  Push(u, s, e);
+  if (e < l || r < s) return -1;
+  if (s == e) return st[u].mn == 0 ? s : -1;
+  int v = u << 1, w = v | 1, m = s + e >> 1;
+  int lq = Idx_query(l, r, v, s, m);
+  if (lq == -1) {
+    return Idx_query(l, r, w, m + 1, e);
   }
-  node Query(int l, int r) {
-    return Query(1, 0, size, l, r);
-  }
-  int Idx_query(int u, int s, int e, int l, int r) {
-    Push(u, s, e);
-    if (e < l || r < s) return -1;
-    if (s == e) return st[u].mn == 0 ? s : -1;
-    int v = u << 1, w = v | 1, m = s + e >> 1;
-    int lq = Idx_query(v, s, m, l, r);
-    if (lq == -1) {
-      return Idx_query(w, m + 1, e, l, r);
-    }
-    return lq;
-  }
-  int Idx_query(int l, int r) {
-    return Idx_query(1, 0, size, l, r);
-  }
-};
+  return lq;
+}

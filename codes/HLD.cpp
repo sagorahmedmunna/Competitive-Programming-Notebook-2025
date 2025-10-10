@@ -1,62 +1,56 @@
-struct HeavyLightDecomposition {
-  int t = 0;
-  vector<int> tin, depth, subtree_size, parent, heavy, head, euler;
-  SegmentTreeIterative<int> sg;
-  HeavyLightDecomposition(int root, vector<vector<int>>& adj, vector<int>& values) {
-    int n = (int)adj.size() + 1;
-    tin.resize(n), depth.resize(n), subtree_size.resize(n), parent.resize(n), heavy.assign(n, -1), head.resize(n), euler.resize(n);
-    Dfs(root, root, adj);
-    Decompose(root, root, adj, values);
-    sg = SegmentTreeIterative<int> (euler);
-  }
-  void Dfs(int u, int p, vector<vector<int>>& adj) {
-    subtree_size[u] = 1;
-    parent[u] = p;
-    for (auto& v : adj[u]) {
-      if (v != p) {
-        depth[v] = depth[u] + 1;
-        Dfs(v, u, adj);
-        subtree_size[u] += subtree_size[v];
-        if (heavy[u] == -1 || subtree_size[heavy[u]] < subtree_size[v]) {
-          heavy[u] = v;
-        }
+// weight in the edges
+int t = 0, a[N];
+int tin[N], depth[N], par[N], head[N], heavy[N], sz[N], values[N];
+vector<array<int, 2>> adj[N];
+void dfs(int u, int p) {
+  par[u] = p, sz[u] = 1;
+  for (auto& [v, w] : adj[u]) {
+    if (v != p) {
+      depth[v] = depth[u] + 1;
+      values[v] = w; // when weight in edges
+      dfs(v, u);
+      sz[u] += sz[v];
+      if (heavy[u] == -1 || sz[heavy[u]] < sz[v]) {
+        heavy[u] = v;
       }
     }
   }
-  void Decompose(int u, int h, vector<vector<int>>& adj, vector<int>& values) {
-    tin[u] = ++t;
-    euler[t] = values[u];
-    head[u] = h;
-    if (heavy[u] != -1) {
-      Decompose(heavy[u], h, adj, values);
-    }
-    for (auto& v : adj[u]) {
-      if (v != parent[u] && v != heavy[u]) {
-        Decompose(v, v, adj, values);
-      }
+}
+void decompose(int u, int h) {
+  head[u] = h;
+  tin[u] = ++t;
+  a[t] = values[u];
+  if (heavy[u] != -1) decompose(heavy[u], h);
+  for (auto& [v, w] : adj[u]) {
+    if (v != par[u] && v != heavy[u]) {
+      decompose(v, v);
     }
   }
-  void Update(int u, int val) {
-    sg.Update(tin[u], val);
+}
+// exclude LCA, then eLca = 1
+// Update and Query are operations of segmentTree
+void UpdatePath(int a, int b, int val, int eLca = 0) {
+  for (; head[a] != head[b]; b = par[head[b]]) {
+    if (depth[head[a]] > depth[head[b]]) swap(a, b);
+    Update(tin[head[b]], tin[b], val);
   }
-  int neutral = 0; #change
-  int Merge(int a, int b) {
-    return max(a, b); #change
+  if (depth[a] > depth[b]) swap(a, b);
+  if (a != b) Update(tin[a] + eLca, tin[b], val);
+}
+int QueryPath(int a, int b, int eLca = 0) {
+  int res = 0;
+  for (; head[a] != head[b]; b = par[head[b]]) {
+    if (depth[head[a]] > depth[head[b]]) swap(a, b);
+    res = (res + Query(tin[head[b]], tin[b])) % mod;
   }
-  int PathQuery(int a, int b) {
-    int res = neutral;
-    for (; head[a] != head[b]; b = parent[head[b]]) {
-      if (depth[head[a]] > depth[head[b]]) {
-        swap(a, b);
-      }
-      res = Merge(res, sg.Query(tin[head[b]], tin[b]));
-    }
-    if (depth[a] > depth[b]) {
-      swap(a, b);
-    }
-    res = Merge(res, sg.Query(tin[a], tin[b]));
-    return res;
-  }
-};
-HeavyLightDecomposition hld(1, adj, a);
-// add segment tree
+  if (depth[a] > depth[b]) swap(a, b);
+  if (a != b) res = (res + Query(tin[a] + eLca, tin[b])) % mod;
+  return res;
+}
+void BuildHLD() {
+  t = 0;
+  for (int i = 0; i <= n; i++) heavy[i] = -1;
+  dfs(1, 1);
+  decompose(1, 1);
+  BuildSeg();
+}
