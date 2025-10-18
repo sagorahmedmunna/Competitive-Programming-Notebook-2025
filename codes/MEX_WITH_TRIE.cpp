@@ -46,10 +46,10 @@ int mex() {
 // only insert the distinct element for mex after xor
 int mexAfterXor(int num) {
   int u = 1, ret = 0;
-  for(int i = 20; i >= 0; i--) {
+  for (int i = 20; i >= 0; i--) {
     int bit = (num >> i) & 1;
-    if(u == 0 || !nxt[u][bit]) return ret;
-    if(cnt[nxt[u][bit]] >= (1 << i)) {
+    if (u == 0 || !nxt[u][bit]) return ret;
+    if (cnt[nxt[u][bit]] >= (1 << i)) {
       u = nxt[u][bit ^ 1];
       ret |= (1 << i);
     } else {
