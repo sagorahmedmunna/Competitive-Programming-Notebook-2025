@@ -21,3 +21,11 @@
   "shell": true,
   "working_dir" : "$file_path"
 }
+// wsl
+{
+  "cmd": ["bash", "-c", "g++ -std=c++17 '$file_name' -o '$file_base_name' && timeout 4s './$file_base_name' < input.txt > output.txt"],
+  "selector": "source.c++",
+  "shell": false,
+  "working_dir": "$file_path",
+  "file_regex": "^(..[^:]*):([0-9]+):?([0-9]+)?:? (.*)$"
+}
