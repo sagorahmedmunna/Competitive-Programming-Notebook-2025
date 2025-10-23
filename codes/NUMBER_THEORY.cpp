@@ -1,6 +1,7 @@
 const int N = 1e6 + 9;
 vector<int> lpf(N), gpf(N);
 vector<array<int, 2>> factors[N];
+
 // sieve for finding lowest prime and highest prime upto N
 for (int i = 2; i < N; i++) {
   if (lpf[i] == 0) {
@@ -29,6 +30,7 @@ for (auto& [p, c] : factors[num]) {
   total_divisors *= (c + 1);
   sum_of_divisors *= (pow(p, c + 1) - 1) / (p - 1);
 }
+
 // (a ^ b) % p   (Binary Exponentiation)
 int BinExp(long long a, long long b, int mod) {
   a %= mod;
@@ -51,6 +53,7 @@ int BinMul(long long a, long long b, int mod) {
   }
   return res;
 }
+
 // (a ^ -1) % mod (inverse of a number)
 BinExp(a, mod - 2);
 // (a / b) % mod
@@ -79,6 +82,27 @@ struct Combinatorics {
     return (nPr(n + r - 1, r) * ifact[r]) % mod;
   }
 } comb(N);
+
+// Pascal's Triangle -> 0 based
+// 0)	           1	   
+// 1)	         1   1	   
+// 2)	       1   2   1	   
+// 3)	     1   3   3   1	   
+// 4)	   1   4   6   4   1	  
+// 5)  1   5   10  10  5   1  
+int PascalsTriangle(int r, int c) {
+  return comb.nCr(r, c);
+}
+// 0)	           1	   
+// 1)	         1   1	   
+// 2)	       1   2   [1]	   
+// 3)	     1   3   [3]   1	   
+// 4)	   1   4   [6]   4   1	  
+// 5)  1   5   10  (10)  5   1  
+// sum of (0Cr, 1Cr, 2Cr, 3Cr, 4Cr) -> 5C(r + 1)
+int HockeyStickIdentity(int n, int r) {
+  return comb.nCr(n + 1, r + 1);
+}
 
 // phi of single integer
 int n = 10;
@@ -119,6 +143,7 @@ for (int i = 1; i < N; i++) {
   for (int j = i; j < N; j += i) sum[j] += i * phi[j / i];
 }
 for (int i = 1; i < N; i++) sum[i] += sum[i - 1] - i;
+
 
 // lcm sum -> ∑ lcm(i, n) for 1 <= i <= n; (n <= 1e6)
 // lcm(1, n) + lcm(2, n) + .. + lcm(n, n)
