@@ -21,6 +21,7 @@ struct SegmentTree {
     return u - n;
   }
 };
+// 1 based array
 // update last occurence of each value with index of array 
 // find the lowest segmentree index which is less then current range "L"
 const int N = 2e5 + 9;
