@@ -18,4 +18,28 @@ struct Manacher { // 0 based
   }
   int odd_length_of_center_i(int i) { return p[i * 2]; }
   int even_length_of_center_i(int i) { return p[i * 2 + 1]; }
+  vector<int> mxR, mxL;
+  void longestPalindromeEndingAtEachPosition() {
+    mxR.assign(n, 1);
+    for (int i = 0; i < n; i++) {
+      int l = p[i * 2];
+      mxR[i + l / 2] = max(mxR[i + l / 2], l);
+      l = p[i * 2 + 1];
+      mxR[i + l / 2] = max(mxR[i + l / 2], l);
+    }
+    for (int i = n - 2; i >= 0; i--)
+      mxR[i] = max(mxR[i], mxR[i + 1] - 2);
+  }
+  void longestPalindromeStartingAtEachPosition() {
+    mxL.assign(n, 1); 
+    for (int i = n - 1; i >= 0; i--) { 
+      int l = p[i * 2];
+      mxL[i - l / 2] = max(mxL[i - l / 2], l);
+      l = p[i * 2 + 1];
+      int idx = min(n - 1, i - l / 2 + 1);
+      mxL[idx] = max(mxL[idx], l);
+    }
+    for (int i = 1; i < n; i++)
+      mxL[i] = max(mxL[i], mxL[i - 1] - 2); 
+  }
 };
