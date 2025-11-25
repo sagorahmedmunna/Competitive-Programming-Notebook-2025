@@ -1,3 +1,32 @@
+// XorBasin on Bitset
+const int D = 5009;
+struct XorBasis {
+  bitset<N> basis[D];
+  int sz = 0, n = 0;
+  void insert(bitset<N> x) {
+    for (int i = D - 1; i >= 0; i--) {
+      if (!(x[i] & 1)) continue;
+      if (basis[i].none()) {
+        basis[i] = x;
+        sz++;
+        break;
+      }
+      x ^= basis[i];
+    } n++;
+  }
+  bool canRepresent(bitset<N> x) {
+    for (int i = D - 1; i >= 0; i--) {
+      if (x[i] & 1) x ^= basis[i];
+    }
+    return x == 0;
+  }
+  int countSubsetsWithXor(bitset<N> x) {
+    if (!canRepresent(x)) return 0;
+    return BinExp(2, n - sz);
+  }
+};
+
+// integer
 using ll = long long;
 const int D = 60;
 struct XorBasis {
