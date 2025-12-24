@@ -1,3 +1,23 @@
+// optimized - final
+// count of 11, from 0 to n
+// first reverse the string, then cal f(s.size() - 1, 0, 10, 1)
+// memset only once
+int64_t dp[32][32][3];
+int64_t f(int i, int cnt, int last, int tight) {
+  if (i < 0) return cnt;
+  auto ret = dp[i][cnt][last];
+  if (~ret && !tight) return ret;
+  ret = 0;
+  int limit = tight ? (s[i] - '0') : 1;
+  for (int d = 0; d <= limit; d++) {
+    int nTight = tight && (d == limit);
+    int nCnt = cnt + (last == d && d == 1);
+    ret += f(i - 1, nCnt, d, nTight);
+  }
+  if (!tight) dp[i][cnt][last] = ret;
+  return ret;
+}
+
 #2 countWithExactDigitCount // f(0, 0, 1, 0)
 int dp[11][11][2][2];
 int targetDigit, targetCnt;
