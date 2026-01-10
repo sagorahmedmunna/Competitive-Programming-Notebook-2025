@@ -49,3 +49,35 @@ void compute_automaton(const string& s) {
     }
   }
 }
+
+/*
+Border = prefix which is also suffix (≠ whole string)
+Example: "abcababcab" → ab, abcab
+*/
+vector<int> borders(string& s) {
+  auto pi = get_pi(s);
+  int n = s.size(), i = pi[n - 1];
+  vector<int> a;
+  while (i > 0) {
+    a.push_back(i);
+    i = pi[i - 1];
+  }
+  reverse(a.begin(), a.end());
+  return a;
+}
+/*
+Period = prefix that generates the string by repetition
+(last repetition may be partial)
+Example: "abcabca" → abc, abcabc, abcabca
+*/
+vector<int> periods(string& s) {
+  auto pi = get_pi(s);
+  int n = s.size(), i = pi[n - 1];
+  vector<int> a;
+  while (i > 0) {
+    a.push_back(n - i);
+    i = pi[i - 1];
+  }
+  a.push_back(n);
+  return a;
+}
