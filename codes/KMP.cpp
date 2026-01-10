@@ -18,3 +18,19 @@ s = p + "#" + s;
 vector<int> pi = get_pi(s);
 int ans = 0;
 for (auto& i : pi) ans += (i == p.size());
+
+int KMPSearch(string& text, string& pattern) {
+  int n = text.size(), m = pattern.size();
+  auto lps = get_pi(pattern);
+  int total = 0;
+  for (int i = 0, j = 0; i < n; ) {
+    if (pattern[j] == text[i]) j++, i++;
+    if (j == m) {
+      total++, j = lps[j - 1];
+    } else if (i < n && pattern[j] != text[i]) {
+      if (j != 0) j = lps[j - 1];
+      else i = i + 1;
+    }
+  }
+  return total;
+}
