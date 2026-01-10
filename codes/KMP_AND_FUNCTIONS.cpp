@@ -52,6 +52,25 @@ void compute_automaton(const string& s) {
 }
 
 /*
+substring containing at least once
+i → number of characters placed so far
+state → how many characters of pattern matched so far
+*/
+int n, m, dp[1009][N][2];
+int f(int i, int state, int found) {
+  if (i == n) return found;
+  auto& ret = dp[i][state][found];
+  if (~ret) return ret;
+  ret = 0;
+  for (int c = 0; c < 26; c++) {
+    int nState = aut[state][c];
+    int nFound = found || nState == m;
+    ret = (ret + f(i + 1, nState, nFound)) % mod;
+  }
+  return ret;
+}
+
+/*
 Border = prefix which is also suffix (≠ whole string)
 Example: "abcababcab" → ab, abcab
 */
