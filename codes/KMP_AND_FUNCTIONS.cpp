@@ -42,10 +42,11 @@ void compute_automaton(const string& s) {
   auto pi = get_pi(t);
   for (int i = 0; i < n; i++) {
     for (int c = 0; c < 26; c++) {
-      if (i > 0 && 'a' + c != t[i])
+      char ch = 'a' + c; // change if capital
+      if (i > 0 && ch != t[i])
         aut[i][c] = aut[pi[i - 1]][c];
       else
-        aut[i][c] = i + ('a' + c == t[i]);
+        aut[i][c] = i + (ch == t[i]);
     }
   }
 }
