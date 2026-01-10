@@ -34,3 +34,18 @@ int KMPSearch(string& text, string& pattern) {
   }
   return total;
 }
+const int N = 1e5 + 9;
+int aut[N][26];
+void compute_automaton(const string& s) {
+  string t = s + '#';
+  int n = t.size();
+  auto pi = get_pi(t);
+  for (int i = 0; i < n; i++) {
+    for (int c = 0; c < 26; c++) {
+      if (i > 0 && 'a' + c != t[i])
+        aut[i][c] = aut[pi[i - 1]][c];
+      else
+        aut[i][c] = i + ('a' + c == t[i]);
+    }
+  }
+}
