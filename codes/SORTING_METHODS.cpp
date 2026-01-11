@@ -12,6 +12,7 @@ int64_t mergeSort(int l, int r) {
   inplace_merge(a.begin() + l, a.begin() + m + 1, a.begin() + r + 1);
   return ret;
 }
+int invCnt = mergeSort(0, n - 1);
 // choose any element and move it to another position: n - LIS.
 int lis(vector<int> p) {
   int n = p.size();
