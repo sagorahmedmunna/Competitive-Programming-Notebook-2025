@@ -57,7 +57,7 @@ i → number of characters placed so far
 state → how many characters of pattern matched so far
 */
 int n, m, dp[1009][N][2];
-int f(int i, int state, int found) {
+int f(int i = 0, int state = 0, int found = 0) {
   if (i == n) return found;
   auto& ret = dp[i][state][found];
   if (~ret) return ret;
