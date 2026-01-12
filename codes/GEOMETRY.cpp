@@ -13,6 +13,11 @@ void chebyshevToManhattan(int& x, int& y) {
 ll manhattanDistance(point& p1, point& p2) {
   return abs(p1.x - p2.x) + abs(p1.y - p2.y);
 }
+/*
+  Calculates the minimum time to move between two points
+  when diagonal movement is allowed.
+  This uses Chebyshev distance.
+*/
 ll chebyshevDistance(point& p1, point& p2) {
   return max(abs(p1.x - p2.x), abs(p1.y - p2.y));
 }
