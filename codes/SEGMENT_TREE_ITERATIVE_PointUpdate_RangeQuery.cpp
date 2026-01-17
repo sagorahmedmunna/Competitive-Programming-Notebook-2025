@@ -1,8 +1,6 @@
 template <class T> struct SegmentTreeIterative {
   int n = 1;
   vector<T> st;
-  SegmentTreeIterative() {}
-  SegmentTreeIterative(int n) { Initial(n); }
   SegmentTreeIterative(vector<int>& a) {
     Initial((int)a.size() - 1);
     Build(a);
@@ -18,18 +16,15 @@ template <class T> struct SegmentTreeIterative {
     return min(a, b);
   }
   void Build(vector<int>& a) {
-    for (int i = 1; i <= n; ++i) {
+    for (int i = 1; i <= n; ++i)
       st[n + i] = a[i];
-    }
-    for (int u = n - 1; u > 0; --u) {
+    for (int u = n - 1; u > 0; --u)
       st[u] = Merge(st[u << 1], st[u << 1 | 1]);
-    }
   }
   void Update(int idx, T val) {
     st[idx += n] = val;
-    for (idx /= 2; idx; idx /= 2) {
+    for (idx /= 2; idx; idx /= 2)
       st[idx] = Merge(st[idx << 1], st[idx << 1 | 1]);
-    }
   }
   T Query(int l, int r) {
     T res = neutral;

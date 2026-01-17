@@ -7,8 +7,6 @@ struct node { #change
 struct SegmentTree {
   int size = 1;
   vector<node> st;
-  SegmentTree() {}
-  SegmentTree(int n) { Initial(n); }
   SegmentTree(vector<int>& a) {
     Initial((int)a.size() - 1);
     Build(1, 0, size, a);

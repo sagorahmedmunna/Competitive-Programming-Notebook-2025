@@ -26,6 +26,5 @@ bool topological_sort(vector<vector<int>>& adj) {
       }
     }
     order.push_back(u);
-  }
-  return (int)order.size() == n;
+  } return (int)order.size() == n;
 }

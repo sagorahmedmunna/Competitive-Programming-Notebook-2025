@@ -1,8 +1,6 @@
 struct FenWickTree {
   int n;
   vector<long long> ft;
-  FenWickTree() {}
-  FenWickTree(int n) { Initial(n); }
   FenWickTree(vector<int>& a) {
     Initial((int)a.size());
     Build(a);

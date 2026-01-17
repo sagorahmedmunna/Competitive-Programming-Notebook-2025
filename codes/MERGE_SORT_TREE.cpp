@@ -2,8 +2,6 @@
 struct MergeSortTree {
   int size = 1;
   vector<ordered_multiset<int>> st; #change
-  MergeSortTree() {}
-  MergeSortTree(int n) { Initial(n); }
   MergeSortTree(vector<int>& a) {
     Initial((int)a.size() - 1);
     Build(1, 1, size, a);

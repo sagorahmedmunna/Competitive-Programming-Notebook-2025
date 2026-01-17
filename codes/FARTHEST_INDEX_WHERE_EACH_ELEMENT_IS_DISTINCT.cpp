@@ -1,5 +1,4 @@
-// 0 based
-// farthest index where each element is distinct
+// 0 based, farthest index where each element is distinct
 array<vector<int>, 2> farthestDistinctElementIndex(vector<int>& a) {
   int n = a.size(), mxIdx = -1;
   map<int, int> mp;

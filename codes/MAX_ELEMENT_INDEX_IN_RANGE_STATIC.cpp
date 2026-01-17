@@ -1,6 +1,4 @@
-const int N = 1e5 + 9;
-const int LOG = 20;
-int n, a[N], st[N][LOG], lg[N];
+int n, a[N], st[N][LOG], lg[N]; // LOG = 20
 void Preprocess() {
   for (int i = 2; i < N; ++i) lg[i] = lg[i / 2] + 1;
 }

@@ -1,4 +1,3 @@
-const int mod = 1e9 + 7;
 int distinctSubseq(string &a) {
   vector<int> last(26); // for array, use map
   int res = 1;

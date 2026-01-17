@@ -50,7 +50,6 @@ void compute_automaton(const string& s) {
     }
   }
 }
-
 /*
 substring containing at least once
 i → number of characters placed so far
@@ -69,7 +68,6 @@ int f(int i = 0, int state = 0, int found = 0) {
   }
   return ret;
 }
-
 /*
 Border = prefix which is also suffix (≠ whole string)
 Example: "abcababcab" → ab, abcab

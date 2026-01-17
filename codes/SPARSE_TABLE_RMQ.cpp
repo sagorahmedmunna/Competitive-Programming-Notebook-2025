@@ -1,9 +1,8 @@
 const int N = (int)2e5 + 9;
 int lg[N];
 void Preprocess() {
-  for (int i = 2; i < N; ++i) {
+  for (int i = 2; i < N; ++i)
     lg[i] = lg[i / 2] + 1;
-  }
 }
 template <class T> struct RMQ {
   int n = 1, LOG = 1;
@@ -11,7 +10,6 @@ template <class T> struct RMQ {
   T Merge(T& a, T& b) {
     return min(a, b); #change
   }
-  RMQ() {}
   RMQ(vector<T>& a) {
     if (lg[2] == 0) Preprocess();
     n = (int)a.size(), LOG = __lg(n) + 1;

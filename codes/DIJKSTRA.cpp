@@ -1,4 +1,3 @@
-using ll = long long;
 const ll INF = 1.1e17;
 vector<ll> Dijkstra(vector<vector<array<ll, 2>>>& adj, int source = 1) {
   int n = (int)adj.size();
