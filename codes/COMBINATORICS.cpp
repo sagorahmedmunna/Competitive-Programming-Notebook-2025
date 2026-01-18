@@ -42,14 +42,18 @@ void CombinatoricsPrecalculate() {
   for (int i = 2; i < N; i++) inv[i] = mod - (mod / i) * inv[mod % i] % mod;
   for (int i = 2; i < N; i++) ifact[i] = (ifact[i - 1] * inv[i]) % mod;
 }
-int nPr(int n, int r) { // Permutations
+// Permutations: Arrangements of r elements from n distinct elements
+int nPr(int n, int r) {
   if (n < r) return 0;
   return (fact[n] * ifact[n - r]) % mod;
 }
-int nCr(int n, int r) { // Combinations
+// Combinations: Selections of r elements from n distinct elements
+int nCr(int n, int r) {
+  if (n < r) return 0;
   return (nPr(n, r) * ifact[r]) % mod;
 }
-int nCr_rep(int n, int r) { // Combinations with repetition
+// Combinations with Repetition: Choosing r items from n types (multisets)
+int nCr_rep(int n, int r) {
   return nCr(n + r - 1, r);
 }
 // Number of ways to distribute n identical items into k bins (bins can be empty)
