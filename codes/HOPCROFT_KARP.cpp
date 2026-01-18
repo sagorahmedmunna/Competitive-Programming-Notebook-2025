@@ -41,3 +41,8 @@ int max_matching() {
       ret += !match[i] and dfs(i);
   return ret;
 }
+void printPairs() {
+  for (int i = 1; i <= n + m; ++i)
+    if (match[i] && i < match[i])
+      cout << i << " " << match[i] << "\n";
+}
