@@ -1,5 +1,9 @@
-// returns the max sum and permuation
-// for minimum, convert each value to negative.
+/*
+	Hungarian Algorithm: max weight assignment (rows → distinct columns)
+	Input: cost matrix a[i][j] (0-based)
+	Output: {max_sum, ans}, where ans[i] = column assigned to row i
+	To get minimum assignment, negate the matrix values
+*/
 template<typename T>
 pair<T, vector<int> > hungarian(const vector<vector<T> > &a) {
 	if (a.empty()) return {0, {}};
