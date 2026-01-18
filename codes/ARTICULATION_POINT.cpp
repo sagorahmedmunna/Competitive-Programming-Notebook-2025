@@ -1,4 +1,3 @@
-vector<int> adj[N];
 int t = 0;
 vector<int> tin(N, -1), low(N), ap;
 void dfs (int u, int p) {
@@ -11,14 +10,11 @@ void dfs (int u, int p) {
       } else {
         child++;
         dfs(v, u);
-        if (tin[u] <= low[v]) {
-          is_ap = 1;
-        }
+        if (tin[u] <= low[v]) is_ap = 1;
         low[u] = min(low[u], low[v]);
       }
     }
   }
-  if ((u != p or child > 1) and is_ap) {
+  if ((u != p or child > 1) and is_ap)
     ap.push_back(u);
-	}
 }

@@ -6,6 +6,5 @@ int distinctSubseq(string &a) {
     if (curr < 0) curr += mod;
     last[ai - 'a'] = res;
     res = curr;
-  }
-  return (res - 1 + mod) % mod; // without empty set
+  } return (res - 1 + mod) % mod; // without empty set
 }

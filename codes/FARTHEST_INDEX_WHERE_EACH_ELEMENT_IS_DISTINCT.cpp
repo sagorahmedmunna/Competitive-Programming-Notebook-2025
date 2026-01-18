@@ -12,6 +12,5 @@ array<vector<int>, 2> farthestDistinctElementIndex(vector<int>& a) {
   for (int i = n - 1; i >= 0; i--) {
     if (mp.count(a[i])) mxIdx = min(mxIdx, mp[a[i]]);
     mp[a[i]] = i, r[i] = mxIdx - 1;
-  }
-  return {l, r};
+  } return {l, r};
 }

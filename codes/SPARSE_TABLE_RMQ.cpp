@@ -1,8 +1,7 @@
 const int N = (int)2e5 + 9;
 int lg[N];
 void Preprocess() {
-  for (int i = 2; i < N; ++i)
-    lg[i] = lg[i / 2] + 1;
+  for (int i = 2; i < N; ++i) lg[i] = lg[i / 2] + 1;
 }
 template <class T> struct RMQ {
   int n = 1, LOG = 1;

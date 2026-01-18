@@ -36,8 +36,7 @@ int32_t main() {
     reverse (path.begin(), path.end());
     cout << "Negative cycle: ";
     for (int i=0; i<path.size(); ++i) cout << path[i] << ' ';
-  }
-  return 0;
+  } return 0;
 }
 // ## Bellman-ford (V * E)
 vector<int> bellman_ford(int s){
@@ -54,6 +53,5 @@ vector<int> bellman_ford(int s){
       }
     }
     if(!any)  break;
-  }
-  return dis;
+  } return dis;
 }

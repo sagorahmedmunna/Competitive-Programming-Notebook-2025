@@ -8,7 +8,6 @@ int64_t largestRectangleInHistogram(vector<int>& a) {
       st.pop();
       int left = st.empty() ? -1 : st.top();
       mx = max(mx, h * (i - left - 1));
-    }
-    st.push(i);
+    } st.push(i);
   } return mx;
 }

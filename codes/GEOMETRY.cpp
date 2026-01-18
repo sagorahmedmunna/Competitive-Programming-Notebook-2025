@@ -2,6 +2,10 @@ const double PI = acos((double)-1.0);
 using ld = long double;
 using ll = long long;
 struct point { ld x, y; };
+point operator+(const point& a, const point& b){ return {a.x+b.x, a.y+b.y}; }
+point operator-(const point& a, const point& b){ return {a.x-b.x, a.y-b.y}; }
+point operator*(const point& a, ld k){ return {a.x*k, a.y*k}; }
+point operator/(const point& a, ld k){ return {a.x/k, a.y/k}; }
 void manhattanToChebychev(int& x, int& y) {
   int X = x + y, Y = x - y;
   x = X, y = Y;
@@ -21,11 +25,26 @@ ll manhattanDistance(point& p1, point& p2) {
 ll chebyshevDistance(point& p1, point& p2) {
   return max(abs(p1.x - p2.x), abs(p1.y - p2.y));
 }
-// determines the relative position (cross product) of a point (p3) 
-// with respect to the line passing through (p1) and (p2)
-// if (d > 0): point (p3) is to the left of the line
-// if (d < 0): point (p3) is to the right of the line
-// if (d == 0): point (p3) lies exactly on the line.
+// distance of two points
+ld distance(point& p1, point& p2) {
+  return sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
+}
+ld dot(point a, point b){ return a.x*b.x + a.y*b.y; }
+ld cross(point a, point b){ return a.x*b.y - a.y*b.x; }
+ld pointLineDistance(point p, point a, point b){
+  return abs(cross(b-a, p-a) / distance(a, b));
+}
+point project(point p, point a, point b){
+  ld t = dot(p-a, b-a) / dot(b-a, b-a);
+  return a + (b-a)*t;
+}
+/*
+  determines the relative position (cross product) of a point (p3)
+  with respect to the line passing through (p1) and (p2)
+  if (d > 0): point (p3) is to the left of the line
+  if (d < 0): point (p3) is to the right of the line
+  if (d == 0): point (p3) lies exactly on the line.
+*/
 ll determinant(point p1, point p2, point p3) {
   ll d = (p2.x - p1.x) * (p3.y - p1.y) - (p2.y - p1.y) * (p3.x - p1.x);
   return d;
@@ -42,10 +61,6 @@ bool doLinesIntersect(point p1, point p2, point p3, point p4) {
   ll d4 = determinant(p1, p2, p4);
   return (d1 * d2 < 0) && (d3 * d4 < 0);
 }
-// distance of two points
-ld distance(point& p1, point& p2) {
-  return sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
-}
 // a point inside cricle
 // x1, y1 = point of circle, r = radius of circle
 // x2, y2 = target point
@@ -54,6 +69,9 @@ bool isInside(int x1, int y1, int x2, int y2, int r) {
 }
 ld toDegrees(ld radians) {
   return radians * (180.0 / PI);
+}
+point rotate(point p, ld theta){ // theta in radians
+  return {p.x*cos(theta) - p.y*sin(theta), p.x*sin(theta) + p.y*cos(theta)};
 }
 // circle with radius r
 struct Circle {
@@ -101,9 +119,9 @@ struct Triangle {
   ld Angle_C_Degrees() { return toDegrees(Angle_C_Radians()); }
   ld Inradius() { return sqrt((s - a) * (s - b) * (s - c) / s); }
   ld Circumradius() { return (a * b * c) / (4 * Area()); }
-  ld Exradius_A() { return sqrt((s - a) * (s - b) * (s - c) / (s - a)); }
-  ld Exradius_B() { return sqrt((s - a) * (s - b) * (s - c) / (s - b)); }
-  ld Exradius_C() { return sqrt((s - a) * (s - b) * (s - c) / (s - c)); }
+  ld Exradius_A() { return Area() / (s - a); }
+  ld Exradius_B() { return Area() / (s - b); }
+  ld Exradius_C() { return Area() / (s - c); }
   ld Altitude_A() { return 2 * Area() / a; }
   ld Altitude_B() { return 2 * Area() / b; }
   ld Altitude_C() { return 2 * Area() / c; }
@@ -111,6 +129,12 @@ struct Triangle {
   ld Median_B() { return sqrt((2 * a * a + 2 * c * c - b * b) / 4); }
   ld Median_C() { return sqrt((2 * a * a + 2 * b * b - c * c) / 4); }
 };
+point circumcenter(point a, point b, point c){ // triangle
+  ld D = 2*(a.x*(b.y-c.y)+b.x*(c.y-a.y)+c.x*(a.y-b.y));
+  ld Ux = ((a.x*a.x + a.y*a.y)*(b.y-c.y)+(b.x*b.x + b.y*b.y)*(c.y-a.y)+(c.x*c.x + c.y*c.y)*(a.y-b.y))/D;
+  ld Uy = ((a.x*a.x + a.y*a.y)*(c.x-b.x)+(b.x*b.x + b.y*b.y)*(a.x-c.x)+(c.x*c.x + c.y*c.y)*(b.x-a.x))/D;
+  return {Ux, Uy};
+}
 // n sided polygon (n-gon) with side length a
 struct Polygon {
   int n;

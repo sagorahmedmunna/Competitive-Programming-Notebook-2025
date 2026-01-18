@@ -1,34 +1,28 @@
 const int N = 2e5 * 22 + 9;
 int nxt[N][2], cnt[N], intCnt[N], node = 2;
-void insert(int x) {
-  int u = 1;
+void insert(int x, int u = 1) {
   for(int i = 20; i >= 0; i--) {
     int bit = (x >> i) & 1;
     if(!nxt[u][bit]) nxt[u][bit] = node++;
     u = nxt[u][bit];
     cnt[u]++;
-  }
-  intCnt[u]++;
+  } intCnt[u]++;
 }
-int find(int x) {
-  int u = 1;
+int find(int x, int u = 1) {
   for (int i = 20; i >= 0; i--) {
     int bit = (x >> i) & 1;
     if (!nxt[u][bit]) return 0;
     u = nxt[u][bit];
-  }
-  return intCnt[u];
+  } return intCnt[u];
 }
-void erase(int x) {
+void erase(int x, int u = 1) {
   if (find(x) == 0) return;
-  int u = 1;
   for (int i = 20; i >= 0; i--) {
     int bit = (x >> i) & 1;
     int v = nxt[u][bit];
     cnt[v]--;
     u = v;
-  }
-  intCnt[u]--;
+  } intCnt[u]--;
 }
 int mex() {
   int u = 1, ret = 0;
@@ -40,8 +34,7 @@ int mex() {
     } else {
       u = nxt[u][0];
     }
-  }
-  return ret;
+  } return ret;
 }
 // only insert the distinct element for mex after xor
 int mexAfterXor(int num) {
@@ -55,6 +48,5 @@ int mexAfterXor(int num) {
     } else {
       u = nxt[u][bit];
     }
-  }
-  return ret;
+  } return ret;
 }

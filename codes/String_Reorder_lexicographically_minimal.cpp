@@ -1,4 +1,4 @@
-int n, la, A[36];
+int n, la, A[36]; // no two adjacent characters are the same
 string s, ans;
 int main() {
   cin >> s; n = s.size(); s = "0" + s;
@@ -14,6 +14,5 @@ int main() {
       break;
     }
     if (ans.size() != i) { cout << "-1\n"; return 0; }
-  }
-  cout << ans << "\n";
+  } cout << ans << "\n";
 }

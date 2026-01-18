@@ -45,30 +45,26 @@ struct XorBasis {
     } n++;
   }
   bool canRepresent(ll x) {
-    for (int i = D - 1; i >= 0; i--) {
+    for (int i = D - 1; i >= 0; i--)
       if ((x >> i) & 1) x ^= basis[i];
-    }
     return x == 0;
   }
   ll maxXor(ll x = 0) {
-    for (int i = D - 1; i >= 0; i--) {
+    for (int i = D - 1; i >= 0; i--)
       if ((x ^ basis[i]) > x) x ^= basis[i];
-    }
     return x;
   }
   ll minXor() { // except xor 0
-    for (int i = 0; i < D; i++) {
+    for (int i = 0; i < D; i++)
       if (basis[i]) return basis[i];
-    }
     return 0;
   }
   ll maxXorWith(ll x) {
     return maxXor(x);
   }
   ll minXorWith(ll x) {
-    for (int i = D - 1; i >= 0; i--) {
+    for (int i = D - 1; i >= 0; i--)
       if ((x ^ basis[i]) < x) x ^= basis[i];
-    }
     return x;
   }
   ll countDistinctXors() {
@@ -96,7 +92,7 @@ struct XorBasis {
     if (n - sz > 60) return kthXor(1);
     ll totComb = 1LL << n;
     ll disComb = countDistinctXors();
-    ll dupPerDis = totComb / disComb;    
+    ll dupPerDis = totComb / disComb;
     ll disIdx = (k - 1) / dupPerDis + 1;
     return kthXor(disIdx);
   }
@@ -104,7 +100,7 @@ struct XorBasis {
     if (n - sz > 60) return kthXor(countDistinctXors());
     ll totComb = 1LL << n;
     ll disComb = countDistinctXors();
-    ll dupPerDis = totComb / disComb;    
+    ll dupPerDis = totComb / disComb;
     ll disIdx = (k - 1) / dupPerDis + 1;
     ll desIdx = disComb - disIdx + 1;
     return kthXor(desIdx);

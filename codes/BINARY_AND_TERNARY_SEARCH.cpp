@@ -5,6 +5,12 @@ while (lo <= hi) {
   if (f(mid)) hi = mid - 1;
   else lo = mid + 1;
 }
+// -> another version
+while (lo < hi) {
+  int mid = (lo + hi) / 2;
+  if (f(mid)) hi = mid;
+  else lo = mid + 1;
+}
 //Binary Search (double)
 double lo = 0, hi = inf;
 int itr = 50;

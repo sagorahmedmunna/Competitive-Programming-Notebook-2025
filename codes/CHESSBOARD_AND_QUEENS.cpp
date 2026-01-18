@@ -1,6 +1,6 @@
 string board[8];
 bool col[8], diag1[15], diag2[15];
-int64_t ans = 0;
+ll ans = 0;
 void dfs(int r) {
   if (r == 8) { ans++; return; }
   for (int c = 0; c < 8; c++) {

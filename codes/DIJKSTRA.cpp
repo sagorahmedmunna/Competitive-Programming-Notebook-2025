@@ -17,6 +17,5 @@ vector<ll> Dijkstra(vector<vector<array<ll, 2>>>& adj, int source = 1) {
         pq.push({dis[v], v});
       }
     }
-  }
-  return dis;
+  } return dis;
 }

@@ -2,8 +2,8 @@
 // count of 11, from 0 to n
 // first reverse the string, then cal f(s.size() - 1, 0, 10, 1)
 // memset only once
-int64_t dp[32][32][3];
-int64_t f(int i, int cnt, int last, int tight) {
+ll dp[32][32][3];
+ll f(int i, int cnt, int last, int tight) {
   if (i < 0) return cnt;
   auto ret = dp[i][cnt][last];
   if (~ret && !tight) return ret;
@@ -20,8 +20,8 @@ int64_t f(int i, int cnt, int last, int tight) {
 // handle case of '0' -> no two adjacent digits are the same.
 // int nLast = (last == 10 && d == 0) ? 10 : d;
 // or use started state for keep track that if number has started
-int64_t dp[20][11];
-int64_t f(int i, int last, int tight) {
+ll dp[20][11];
+ll f(int i, int last, int tight) {
   if (i < 0) return 1;
   auto ret = dp[i][last];
   if (~ret && !tight) return ret;
@@ -135,10 +135,10 @@ int f(int i, int rem, int tight, int started) {
 --> find sum of integers and conunt at same time
 #12 sum and count of all numbers x that has at most k distinct digits // f(0, 0, 1, 0)
 const int mod = 998244353;
-int64_t n, k, Pow10[20];
-array<int64_t, 2> dp[20][1025][2][2]; // dp[0] -> cnt, dp[1] -> sum;
+ll n, k, Pow10[20];
+array<ll, 2> dp[20][1025][2][2]; // dp[0] -> cnt, dp[1] -> sum;
 string s;
-array<int64_t, 2> f(int i, int mask, int tight, int started) {
+array<ll, 2> f(int i, int mask, int tight, int started) {
   if (i == n) {
     return {started && (__builtin_popcount(mask) <= k), 0};
   }
@@ -159,7 +159,7 @@ array<int64_t, 2> f(int i, int mask, int tight, int started) {
   }
   return ret;
 }
-int64_t Cnt(int64_t num) {
+ll Cnt(ll num) {
   if (num <= 0) return 0;
   memset(dp, -1, sizeof dp);
   s = to_string(num);
@@ -172,12 +172,12 @@ int64_t Cnt(int64_t num) {
 }
 --> find digit sum upto n, this is optimized version, use memset just once
 string s;
-int64_t dp[20][2][2];
-int64_t cnt[20][2][2];
-pair<int64_t, int64_t> f(int i, int tight, int started) {
+ll dp[20][2][2];
+ll cnt[20][2][2];
+pair<ll, ll> f(int i, int tight, int started) {
   if (i < 0) return {0, started ? 1 : 0}; // {sum, count of valid numbers}
   if (~dp[i][tight][started] && !tight) return {dp[i][tight][started], cnt[i][tight][started]};
-  int64_t totalSum = 0, totalCount = 0;
+  ll totalSum = 0, totalCount = 0;
   int limit = tight ? (s[i] - '0') : 9;
   for (int d = 0; d <= limit; d++) {
     int newTight = tight && (d == limit);
@@ -195,7 +195,7 @@ pair<int64_t, int64_t> f(int i, int tight, int started) {
   cnt[i][tight][started] = totalCount;
   return {totalSum, totalCount};
 }
-int64_t sumOfAllDigits(int64_t num) {
+ll sumOfAllDigits(ll num) {
   if (num < 0) return 0;
   s = to_string(num);
   reverse(s.begin(), s.end());

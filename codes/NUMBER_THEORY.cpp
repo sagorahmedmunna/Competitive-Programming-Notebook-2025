@@ -1,8 +1,7 @@
-using ll = long long;
+using ll = ll;
 const int N = 1e6 + 9;
 vector<int> lpf(N), gpf(N);
 vector<array<int, 2>> factors[N];
-
 // sieve for finding lowest prime and highest prime upto N
 for (int i = 2; i < N; i++) {
   if (lpf[i] == 0) {
@@ -31,7 +30,6 @@ for (auto& [p, c] : factors[num]) {
   total_divisors *= (c + 1);
   sum_of_divisors *= (pow(p, c + 1) - 1) / (p - 1);
 }
-
 // phi of single integer
 int n = 10;
 ll num = n;
@@ -43,7 +41,6 @@ for (ll i = 2; i * i <= num; i++) {
   }
 }
 if (num > 1) phi_of_n -= phi_of_n / num;
-
 // phi upto N
 vector<int> phi(N);
 // initial 0 to N
@@ -55,7 +52,6 @@ for (int i = 2; i < N; i++) {
     }
   }
 }
-
 // gcd sum -> ∑ gcd(i, n) for 1 <= i <= n; (n <= 1e9)
 // gcd(1, n) + gcd(2, n) + .. + gcd(n, n)
 ll sum = 0;
@@ -71,8 +67,6 @@ for (int i = 1; i < N; i++) {
   for (int j = i; j < N; j += i) sum[j] += i * phi[j / i];
 }
 for (int i = 1; i < N; i++) sum[i] += sum[i - 1] - i;
-
-
 // lcm sum -> ∑ lcm(i, n) for 1 <= i <= n; (n <= 1e6)
 // lcm(1, n) + lcm(2, n) + .. + lcm(n, n)
 phi[1] = 2; // phi[1] should be 2 for this algorithm

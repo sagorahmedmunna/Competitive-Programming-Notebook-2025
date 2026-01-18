@@ -53,8 +53,7 @@ void BuildSeg() {
   for (int i = 0; i <= 4 * n; i++) {
     sum[i] = 0;
     lz[i] = INF;
-  }
-  Build();
+  } Build();
 }
 int Idx_query(int l, int r, int u, int s, int e) {
   Push(u, s, e);
@@ -62,8 +61,6 @@ int Idx_query(int l, int r, int u, int s, int e) {
   if (s == e) return st[u].mn == 0 ? s : -1;
   int v = u << 1, w = v | 1, m = s + e >> 1;
   int lq = Idx_query(l, r, v, s, m);
-  if (lq == -1) {
-    return Idx_query(l, r, w, m + 1, e);
-  }
+  if (lq == -1) return Idx_query(l, r, w, m + 1, e);
   return lq;
 }

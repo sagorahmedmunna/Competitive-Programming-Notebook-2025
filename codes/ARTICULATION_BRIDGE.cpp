@@ -1,4 +1,3 @@
-vector<int> adj[N];
 int t = 0;
 vector<int> tin(N, -1), low(N);
 vector<array<int, 2>> ab;
@@ -10,9 +9,8 @@ void dfs (int u, int p) {
         low[u] = min(low[u], tin[v]);
       } else {
         dfs(v, u);
-        if (tin[u] < low[v]) {
+        if (tin[u] < low[v])
           ab.push_back({u, v});
-        }
         low[u] = min(low[u], low[v]);
       }
     }

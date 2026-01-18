@@ -13,9 +13,8 @@ void Preprocess(int sz) {
   rev.resize(sz);
   rev[0] = 0;
   int lg_n = __builtin_ctz(sz);
-  for (int i = 1; i < sz; ++i) {
+  for (int i = 1; i < sz; ++i)
     rev[i] = (rev[i >> 1] >> 1) | ((i & 1) << (lg_n - 1));
-  }
 }
 void fft(vector<cplx> &a, bool inv = 0) {
   int n = a.size();
@@ -35,9 +34,8 @@ void fft(vector<cplx> &a, bool inv = 0) {
       }
     }
   }
-  if (inv) {
+  if (inv)
     for (cplx& z : a) z = z / n;
-  }
 }
 vector<long long> multiply(vector<int> &a, vector<int> &b) {
   int n = a.size(), m = b.size(), sz = 1;

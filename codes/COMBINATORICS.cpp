@@ -1,24 +1,20 @@
 // (a ^ b) % p   (Binary Exponentiation)
 int BinExp(ll a, ll b, int mod) {
-  a %= mod;
-  int res = 1;
+  a %= mod; int res = 1;
   while (b) {
     if (b & 1) res = (res * a) % mod;
     a = (a * a) % mod;
     b >>= 1;
-  }
-  return res;
+  } return res;
 }
 // (a * b) % p   (Binary Multiplication)
 int BinMul(ll a, ll b, int mod) {
-  a %= mod;
-  int res = 0;
+  a %= mod; int res = 0;
   while (b) {
     if (b & 1) res = (res + a) % mod;
     a = (a + a) % mod;
     b >>= 1;
-  }
-  return res;
+  } return res;
 }
 // (a ^ -1) % mod (inverse of a number)
 int modInv(ll a) {

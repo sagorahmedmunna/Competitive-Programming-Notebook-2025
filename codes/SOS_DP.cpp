@@ -11,9 +11,7 @@ int nC2(int n) {
 void forward1() { // sum over subset
   for (int bit = 0; bit < B; bit++) {
     for (int i = 0; i < N; i++) {
-      if (i & (1 << bit)) {
-        f[i] += f[i ^ (1 << bit)];
-      }
+      if (i & (1 << bit)) f[i] += f[i ^ (1 << bit)];
     }
   }
 }
@@ -31,9 +29,7 @@ void backward1() { // exclude sebset sum
 void forward2() { // sum over superset
   for (int bit = 0; bit < B; bit++) {
     for (int i = N - 1; i >= 0; i--) {
-      if (i & (1 << bit)) {
-        g[i ^ (1 << bit)] += g[i];
-      }
+      if (i & (1 << bit)) g[i ^ (1 << bit)] += g[i];
     }
   }
 }
