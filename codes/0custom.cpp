@@ -2,11 +2,10 @@ freopen("input.in", "r", stdin);
 freopen("output.out", "w", stdout);
 ios_base::sync_with_stdio(0), cin.tie(0);
 // pragma
+#pragma GCC optimize("O3,unroll-loops")
+#pragma GCC target("avx2,bmi,bmi2,lzcnt,popcnt")// use avx for older judges
 #pragma GCC optimize("Ofast")
-#pragma GCC target("avx,avx2,fma")
-#pragma GCC optimize ("O3,unroll-loops")
 #pragma GCC optimize ("-ffloat-store")
-#pragma GCC target ("bmi,bmi2,lzcnt,popcnt")
 #pragma GCC target ("sse,sse2,sse3,ssse3,sse4,abm,mmx")
 // random number generator
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
@@ -72,7 +71,7 @@ int d = log10(num) + 1;
 // set ith bit
 n | (1 << i)
 // unset ith bit
-n & ~(1 << i) 
+n & ~(1 << i)
 // toggle or inverse ith bit
 n ^ (1 << i)
 __builtin_popcountll(x)
