@@ -7,7 +7,9 @@ struct bitVec {
       b[i + 1].second = __builtin_popcountll(b[i].first) + b[i].second;
   }
   int cnt0(int r) {
-    auto [x, y] = b[r >> 6];
+    pair<ll, int> p = b[r >> 6];
+    ll x = p.first;
+    int y = p.second;
     return r - y - __builtin_popcountll(x & ((1ULL << (r & 63)) - 1));
   }
 };
@@ -21,12 +23,26 @@ struct WaveletMatrix {
       for (int i = 0; i < n; ++i) b[i] = ((a[i] >> h) & 1);
       bv[h] = b;
       int cnt0 = bv[h].cnt0(n);
-      array it{begin(nxt), begin(nxt) + cnt0};
+      ll* it[2] = {nxt.data(), nxt.data() + cnt0};
       for (int i = 0; i < n; ++i) *it[b[i]]++ = a[i];
-      pref[h].resize(n + 1), pref[h][0] = 0;
+      pref[h].resize(n + 1);
+      pref[h][0] = 0;
       for (int i = 0; i < n; ++i) pref[h][i + 1] = pref[h][i] + nxt[i];
       swap(a, nxt);
     }
+  }
+  // count i s.t. (l <= i < r) && (v[i] == x)
+  int rank(int l, int r, ll x) {
+    for (int h = (int)(bv).size(); h--;) {
+      int l0 = bv[h].cnt0(l), r0 = bv[h].cnt0(r);
+      if ((x >> h) & 1) {
+        l += bv[h].cnt0(n) - l0;
+        r += bv[h].cnt0(n) - r0;
+      } else {
+        l = l0, r = r0;
+      }
+    }
+    return r - l;
   }
   // k-th (0-indexed) largest number in a[l, r)
   ll kthSmallest(int l, int r, int k) {
