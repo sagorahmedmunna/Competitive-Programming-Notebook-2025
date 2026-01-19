@@ -51,6 +51,7 @@ struct WaveletMatrix {
     }
     return res;
   }
+  // count i s.t. (l <= i < r) && (lower <= v[i] < upper)
   int rangeFreq(int l, int r, int64_t lower, int64_t upper) {
     if (lower > upper) swap(lower, upper);
     return rangeFreq(l, r, upper) - rangeFreq(l, r, lower);
